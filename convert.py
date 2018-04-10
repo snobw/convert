@@ -13,28 +13,34 @@ from io import BytesIO
 # --------
 # globalvar
 # --------
-img_data="codebase64"
+
 
 def main():
 #arguments
-
-#boucle d'execution
+    fromFile(source,destination,name)
+    dataBaseconnection(host,user,password, database)
+    fromDB(source, destination,idacces,table)
+    dataBaseDeconnection(conn)
+    TODO
     
 def fromFile(source,destination,name):
+    #boucle d'execution
   with open(destination+"/"+name, "wb") as handle:
     handle.write(base64.decodebytes(source))
 
 def fromDB(source, destination,idacces,table) :
-    cursor.execute("""SELECT id, name, age FROM users WHERE id = %s""", ("5", ))
+    cursor.execute("""SELECT id, name, age FROM t_synk WHERE id = %s""", ("5", ))
     rows = cursor.fetchall()
+    #boucle d'execution
     for row in rows:
         print('{0} : {1} - {2}'.format(row[0], row[1], row[2]))
 
-def dataBaseconnection():
-    conn = mysql.connector.connect(host="localhost",user="root",password="XXX", database="test1")
+def dataBaseconnection(host,user,password, database):
+    conn = mysql.connector.connect(host,user,password, database)
     cursor = conn.cursor()
+    return cursor
 
-def dataBaseDeconnection():
+def dataBaseDeconnection(conn):
     conn.close()
 
 #arguments    
